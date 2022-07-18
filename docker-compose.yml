@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+
+  database:
+    image: postgres:latest
+    env_file:
+      - ./env/database.env
+    volumes: 
+      - db:/var/lib/postgresql/data   
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - ./env/pgadmin.env
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin4
+    depends_on:
+      - database
+  backend:
+    build: ./backend/
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    depends_on:
+      - database
+
+volumes:
+  db:
+  pgadmin:
