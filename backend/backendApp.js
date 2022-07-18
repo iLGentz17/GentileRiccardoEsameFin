@@ -6,7 +6,7 @@ const app = express();
 
 const pool = new Pool({
     user: "itsuser",
-    host: "database",
+    host: "gentilericcardoesamefin.c9nj1x2p6gk5.eu-west-1.rds.amazonaws.com",
     database: "itsdb",
     password: "itsuser01",
     port: "5432"
